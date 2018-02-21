@@ -18,7 +18,7 @@ lazy val server = (project in file("server")).settings(
     filters,
     ws
     // webjars for Semantic-UI
-    , "org.webjars" %% "webjars-play" % "2.6.1"
+    , "org.webjars" %% "webjars-play" % "2.6.11"
     , "org.webjars" % "Semantic-UI" % semanticV
     , "org.webjars" % "jquery" % jQueryV
     ,
@@ -47,16 +47,16 @@ lazy val client = (project in file("client")).settings(
     "org.webjars" % "Semantic-UI" % semanticV / "semantic.js" minified "semantic.min.js" dependsOn "jquery.js"
   ),
   libraryDependencies ++= Seq(
-    "org.scala-js" %%% "scalajs-dom" % "0.9.3",
+    "org.scala-js" %%% "scalajs-dom" % "0.9.4",
     "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-    "com.typesafe.play" %%% "play-json" % "2.6.1",
-    "com.thoughtworks.binding" %%% "dom" % "11.0.0-M4",
-    "com.thoughtworks.binding" %%% "futurebinding" % "11.0.0-M4",
-    "fr.hmil" %%% "roshttp" % "2.0.2",
+    "com.typesafe.play" %%% "play-json" % "2.6.11",
+    "com.thoughtworks.binding" %%% "dom" % "11.0.1",
+    "com.thoughtworks.binding" %%% "futurebinding" % "11.0.1",
+    "fr.hmil" %%% "roshttp" % "2.1.0",
     // java.time supprot for ScalaJS
-    "org.scala-js" %%% "scalajs-java-time" % "0.2.2",
+    "org.scala-js" %%% "scalajs-java-time" % "0.2.3",
     // jquery support for ScalaJS
-    "be.doeraene" %%% "scalajs-jquery" % "0.9.1"
+    "be.doeraene" %%% "scalajs-jquery" % "0.9.2"
   )
 ).enablePlugins(ScalaJSWeb).
   dependsOn(sharedJs)
@@ -67,7 +67,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
     , libraryDependencies ++= Seq(
       "org.julienrf" %%% "play-json-derived-codecs" % "4.0.0"
       // logging lib that also works with ScalaJS
-      , "biz.enef" %%% "slogging" % "0.6.0"
+      , "biz.enef" %%% "slogging" % "0.6.1"
     ))
   .jsSettings(/* ... */) // defined in sbt-scalajs-crossproject
   .jvmSettings(/* ... */)
