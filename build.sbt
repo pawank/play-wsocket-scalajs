@@ -1,7 +1,7 @@
 // (5) shadow sbt-scalajs' crossProject and CrossType until Scala.js 1.0.0 is released
 import sbtcrossproject.{crossProject, CrossType}
 
-lazy val scalaV = "2.12.3"
+lazy val scalaV = "2.12.4"
 lazy val jQueryV = "2.2.4"
 lazy val semanticV = "2.2.10"
 
