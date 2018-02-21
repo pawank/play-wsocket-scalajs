@@ -18,7 +18,8 @@ lazy val server = (project in file("server")).settings(
     filters,
     ws
     // webjars for Semantic-UI
-    , "org.webjars" %% "webjars-play" % "2.6.3"
+    //, "org.webjars" %% "webjars-play" % "2.6.3"
+    , "org.webjars" %% "webjars-play" % "2.6.1"
     , "org.webjars" % "Semantic-UI" % semanticV
     , "org.webjars" % "jquery" % jQueryV
     ,

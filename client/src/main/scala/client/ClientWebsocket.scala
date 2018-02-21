@@ -42,9 +42,10 @@ case class ClientWebsocket(uiState: UIState)
             errors foreach println
         }
     }
-    socket.onerror = { (e: ErrorEvent) =>
-      println(s"exception with websocket: ${e.message}!")
-      socket.close(0, e.message)
+    socket.onerror = { (e: Event) =>
+      val ee = e.asInstanceOf[ErrorEvent]
+      println(s"exception with websocket: ${ee.message}!")
+      socket.close(0, ee.message)
     }
     socket.onopen = { (_: Event) =>
       println("websocket open!")
