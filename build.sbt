@@ -18,7 +18,7 @@ lazy val server = (project in file("server")).settings(
     filters,
     ws
     // webjars for Semantic-UI
-    , "org.webjars" %% "webjars-play" % "2.6.11"
+    , "org.webjars" %% "webjars-play" % "2.6.3"
     , "org.webjars" % "Semantic-UI" % semanticV
     , "org.webjars" % "jquery" % jQueryV
     ,
@@ -49,7 +49,7 @@ lazy val client = (project in file("client")).settings(
   libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "0.9.4",
     "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-    "com.typesafe.play" %%% "play-json" % "2.6.11",
+    "com.typesafe.play" %%% "play-json" % "2.6.8",
     "com.thoughtworks.binding" %%% "dom" % "11.0.1",
     "com.thoughtworks.binding" %%% "futurebinding" % "11.0.1",
     "fr.hmil" %%% "roshttp" % "2.1.0",
