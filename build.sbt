@@ -1,9 +1,9 @@
 // (5) shadow sbt-scalajs' crossProject and CrossType until Scala.js 1.0.0 is released
 import sbtcrossproject.{crossProject, CrossType}
 
-lazy val scalaV = "2.12.3"
-lazy val jQueryV = "2.2.4"
-lazy val semanticV = "2.2.10"
+lazy val scalaV = "2.12.9"
+lazy val jQueryV = "3.4.1"
+lazy val semanticV = "2.4.1"
 
 lazy val server = (project in file("server")).settings(
   scalaVersion := scalaV,
@@ -13,12 +13,12 @@ lazy val server = (project in file("server")).settings(
   // triggers scalaJSPipeline when using compile or continuous compilation
   compile in Compile := ((compile in Compile) dependsOn scalaJSPipeline).value,
   libraryDependencies ++= Seq(
-    "com.vmunier" %% "scalajs-scripts" % "1.1.1",
+    "com.vmunier" %% "scalajs-scripts" % "1.1.4",
     guice,
     filters,
     ws
     // webjars for Semantic-UI
-    , "org.webjars" %% "webjars-play" % "2.6.1"
+    , "org.webjars" %% "webjars-play" % "2.7.3"
     , "org.webjars" % "Semantic-UI" % semanticV
     , "org.webjars" % "jquery" % jQueryV
     ,
@@ -47,16 +47,16 @@ lazy val client = (project in file("client")).settings(
     "org.webjars" % "Semantic-UI" % semanticV / "semantic.js" minified "semantic.min.js" dependsOn "jquery.js"
   ),
   libraryDependencies ++= Seq(
-    "org.scala-js" %%% "scalajs-dom" % "0.9.3",
+    "org.scala-js" %%% "scalajs-dom" % "0.9.7",
     "org.scala-lang.modules" %% "scala-xml" % "1.0.6",
-    "com.typesafe.play" %%% "play-json" % "2.6.1",
-    "com.thoughtworks.binding" %%% "dom" % "11.0.0-M4",
-    "com.thoughtworks.binding" %%% "futurebinding" % "11.0.0-M4",
+    "com.typesafe.play" %%% "play-json" % "2.7.3",
+    "com.thoughtworks.binding" %%% "dom" % "11.9.0",
+    "com.thoughtworks.binding" %%% "futurebinding" % "11.9.0",
     "fr.hmil" %%% "roshttp" % "2.0.2",
     // java.time supprot for ScalaJS
-    "org.scala-js" %%% "scalajs-java-time" % "0.2.2",
+    "org.scala-js" %%% "scalajs-java-time" % "0.2.6",
     // jquery support for ScalaJS
-    "be.doeraene" %%% "scalajs-jquery" % "0.9.1"
+    "be.doeraene" %%% "scalajs-jquery" % "0.9.5"
   )
 ).enablePlugins(ScalaJSWeb).
   dependsOn(sharedJs)
@@ -65,7 +65,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
   .settings(scalaVersion := scalaV
     , libraryDependencies ++= Seq(
-      "org.julienrf" %%% "play-json-derived-codecs" % "4.0.0"
+      "org.julienrf" %%% "play-json-derived-codecs" % "6.0.0"
       // logging lib that also works with ScalaJS
       , "biz.enef" %%% "slogging" % "0.6.0"
     ))
