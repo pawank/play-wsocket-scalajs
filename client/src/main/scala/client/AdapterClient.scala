@@ -36,6 +36,7 @@ object AdapterClient
 
   @dom
   private def adapterHeader = {
+    println(s"Adapter header..")
     <div class="ui main fixed borderless menu">
       <div class="ui item">
         <img src={"" + g.jsRoutes.controllers.Assets.versioned("images/favicon.png").url}></img>

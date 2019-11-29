@@ -1,8 +1,11 @@
 package shared
 
-import julienrf.json.derived
-import play.api.libs.json.OFormat
+import java.time.ZonedDateTime
 
+import julienrf.json.derived
+import play.api.libs.json.{Format, Json, OFormat}
+import shared.JavaReads._
+import shared.JavaWrites._
 // trait for all messages
 sealed trait AdapterMsg
 
@@ -26,7 +29,11 @@ case class AdapterRunning(logReport: LogReport) extends AdapterMsg
 case class AdapterNotRunning(logReport: Option[LogReport]) extends AdapterMsg
 
 // each LogEntry that is created by the AdapterProcess
-case class LogEntryMsg(logEntry: LogEntry) extends AdapterMsg
+case class LogEntryMsg(logEntry: LogEntry, at: ZonedDateTime) extends AdapterMsg
+object LogEntryMsg {
+  implicit val jsonFormatLogEntry: Format[LogEntryMsg] = Json.format[LogEntryMsg]
+}
+
 
 // sent when the Adapter Process is started
 case object RunStarted extends AdapterMsg

@@ -1,7 +1,8 @@
 package actors
 
-import javax.inject.Inject
+import java.time.ZonedDateTime
 
+import javax.inject.Inject
 import actors.AdapterActor.{SubscribeAdapter, UnSubscribeAdapter}
 import akka.actor.{Actor, ActorLogging, ActorRef}
 import akka.event.LoggingReceive
@@ -81,7 +82,7 @@ class AdapterActor @Inject()(implicit mat: Materializer, ec: ExecutionContext)
   }
 
   private def sendToSubscriber(logEntry: LogEntry): Unit =
-    sendToSubscriber(LogEntryMsg(logEntry))
+    sendToSubscriber(LogEntryMsg(logEntry, ZonedDateTime.now()))
 
   // sends an AdapterMsg to all subscribed users
   private def sendToSubscriber(adapterMsg: AdapterMsg): Unit =

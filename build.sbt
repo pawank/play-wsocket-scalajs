@@ -54,7 +54,8 @@ lazy val client = (project in file("client")).settings(
     "com.thoughtworks.binding" %%% "futurebinding" % "11.9.0",
     "fr.hmil" %%% "roshttp" % "2.0.2",
     // java.time supprot for ScalaJS
-    "org.scala-js" %%% "scalajs-java-time" % "0.2.6",
+    //"org.scala-js" %%% "scalajs-java-time" % "0.2.6",
+    "io.github.cquiroz" %%% "scala-java-time-tzdb" % "2.0.0-M13_2018c",
     // jquery support for ScalaJS
     "be.doeraene" %%% "scalajs-jquery" % "0.9.5"
   )
@@ -65,16 +66,23 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
   .settings(scalaVersion := scalaV
     , libraryDependencies ++= Seq(
-      "org.julienrf" %%% "play-json-derived-codecs" % "6.0.0"
+      "org.julienrf" %%% "play-json-derived-codecs" % "6.0.0",
+      "io.github.cquiroz" %%% "scala-java-time" % "2.0.0-M13",
       // logging lib that also works with ScalaJS
-      , "biz.enef" %%% "slogging" % "0.6.0"
+      "biz.enef" %%% "slogging" % "0.6.0"
     ))
   .jsSettings(/* ... */) // defined in sbt-scalajs-crossproject
-  .jvmSettings(/* ... */)
+  .jvmSettings(
+    libraryDependencies ++= Seq(
+            "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided")
+  )
   .jsConfigure(_ enablePlugins ScalaJSWeb)
 
 lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
 
 // loads the server project at sbt startup
-onLoad in Global := (Command.process("project server", _: State)) compose (onLoad in Global).value
+//onLoad in Global := (Command.process("project server", _: State)) compose (onLoad in Global).value
+onLoad in Global := (onLoad in Global).value andThen { s: State =>
+    "project server" :: s
+}

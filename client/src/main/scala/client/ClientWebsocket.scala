@@ -1,5 +1,7 @@
 package client
 
+import java.time.ZonedDateTime
+
 import org.scalajs.dom.raw._
 import org.scalajs.dom.{document, window}
 import play.api.libs.json.{JsError, JsSuccess, Json}
@@ -29,7 +31,10 @@ case class ClientWebsocket(uiState: UIState)
               changeLastLogLevel(lr)
               newLogEntries(lr)
             }
-          case JsSuccess(LogEntryMsg(le), _) =>
+          case JsSuccess(LogEntryMsg(le, at), _) =>
+            println(s"AT: $at")
+            val log = ZonedDateTime.now()
+            println(s"$log")
             newLogEntry(le)
           case JsSuccess(RunStarted, _) =>
             changeIsRunning(true)
